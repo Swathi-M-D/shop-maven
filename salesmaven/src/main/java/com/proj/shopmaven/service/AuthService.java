@@ -121,4 +121,8 @@ public class AuthService {
                 .getSubject();
     }
     
+    public void logout(User user) {
+        jwtTokenRepository.deleteByUserId(user.getUserId());
+    }
+    
 }
