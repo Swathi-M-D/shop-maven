@@ -22,8 +22,6 @@ public class CartItemDetails {
         this.totalPrice = totalPrice;
     }
 
-    // Getters and setters
-
     public int getProductId() {
         return productId;
     }

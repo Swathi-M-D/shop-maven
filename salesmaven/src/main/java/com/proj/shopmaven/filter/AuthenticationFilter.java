@@ -22,7 +22,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebFilter(urlPatterns = {"/api/*"})
+@WebFilter(urlPatterns = {"/api/*","/admin/*"})
 public class AuthenticationFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
@@ -135,67 +135,5 @@ public class AuthenticationFilter implements Filter {
         }
         return null;
     }
-	
-//	private final AuthService authService;
-//    private final UserRepository userRepository;
-//    
-//    public AuthenticationFilter(AuthService authService, UserRepository userRepository) {
-//    	this.authService = authService;
-//    	this.userRepository = userRepository;
-//    }
-//
-//	@Override
-//	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-//			throws IOException, ServletException {
-//		
-//		System.out.println("➡ Filter triggered for: " + ((HttpServletRequest) request).getRequestURI());
-//		
-//		HttpServletRequest httpRequest = (HttpServletRequest)request;
-//		HttpServletResponse httpResponse = (HttpServletResponse) response;
-//		
-//		if(httpRequest.getRequestURI().equals("api/users/register") || httpRequest.getRequestURI().equals("api/auth/login")) {
-//			chain.doFilter(request, response);
-//			return;
-//		}
-//		
-//		if(httpRequest.getMethod().equalsIgnoreCase("OPTIONS")) {
-//			httpResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-//			httpResponse.setStatus(HttpServletResponse.SC_OK);
-//			return;
-//		}
-//		
-//		String token = getAuthTokenFromCookies(httpRequest);
-//		if(token == null || !authService.validateToken(token)) {
-//			httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//			httpResponse.getWriter().write("Unauthorized: Invalid or missing token");
-//			return;
-//		}
-//		
-//		String username = authService.extractUsername(token);
-//	    Optional<User> userOptional = userRepository.findByUsername(username);
-//	    if (userOptional.isEmpty()) {
-//	        httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//	        httpResponse.getWriter().write("Unauthorized: User not found");
-//	        return;
-//	    }
-//	    
-//	    System.out.println("Authenticated user: "+userOptional.get());
-//	    httpRequest.setAttribute("authenticatedUser", userOptional.get());
-//	    chain.doFilter(request, response);
-//	    
-//	}
-//	
-//	private String getAuthTokenFromCookies(HttpServletRequest request) {
-//      Cookie[] cookies = request.getCookies();
-//      if (cookies != null) {
-//          return Arrays.stream(cookies)
-//                  .filter(cookie -> "authToken".equals(cookie.getName()))
-//                  .map(Cookie::getValue)
-//                  .findFirst()
-//                  .orElse(null);
-//      }
-//      return null;
-//	}
-	
 	
 }
